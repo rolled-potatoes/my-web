@@ -1,0 +1,6 @@
+dist
+node_modules
+
+env.prod.json
+env.dev.json
+.DS_Store
