@@ -1,6 +1,7 @@
 dist
 node_modules
 
+env.json
 env.prod.json
 env.dev.json
 .DS_Store
