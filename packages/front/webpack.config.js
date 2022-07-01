@@ -2,7 +2,7 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const makeAliasPath = () => {
-  const paths = ['pages', 'components', 'templates'];
+  const paths = ['pages', 'components', 'templates','icons', 'constants'];
   return paths.reduce((obj, p) => {
     obj[p] = path.join(__dirname, 'src', p);
     return obj;
@@ -40,8 +40,24 @@ module.exports = {
         },
       },
       {
-        test: /\.css$/,
-        use: ['style-loader', 'css-loader'],
+        test: /\.scss$/,
+        use: [
+          'style-loader',
+          {
+            loader: 'css-loader',
+            options: {
+              modules: {
+                mode: 'local',
+                exportGlobals: true,
+                localIdentName: '[path]__[local]--[hash:base64:5]',
+                localIdentContext: path.resolve(__dirname, 'src'),
+                localIdentHashSalt: 'my-custom-hash',
+                exportLocalsConvention: 'camelCase',
+              },
+            },
+          },
+          'sass-loader',
+        ],
       },
     ],
   },

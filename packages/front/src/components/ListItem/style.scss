@@ -1,0 +1,10 @@
+.actionGroup {
+  display: flex;
+}
+
+.listItem {
+  &.done{
+    text-decoration: line-through;
+    opacity: 0.7;
+  }
+}

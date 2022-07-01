@@ -1,13 +1,14 @@
 import React from 'react';
 import { Routes, BrowserRouter, Route } from 'react-router-dom';
-
-import Main from 'pages/Main';
+import navigationDatas from 'constants/navLink';
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Main />} />
+        {navigationDatas.map(({ url, Component }) => (
+          <Route path={url} element={<Component />} />
+        ))}
       </Routes>
     </BrowserRouter>
   );
