@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "lib": ["es5", "es6"],
     "target": "es6",
     "module": "commonjs",
     "outDir": "./dist",
@@ -7,6 +8,11 @@
     "strict": true,
     "moduleResolution": "node",
     "esModuleInterop": true,
-    "resolveJsonModule": true
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "sourceMap": true,
+    "resolveJsonModule": true,
+    "typeRoots": ["./node_modules/@types", "./src/types"],
+    "declaration": true
   }
 }
