@@ -6,6 +6,7 @@ import passportConfig from './passports';
 import morgan from 'morgan';
 import env from './env.json';
 import { AppDataSource } from './db/data-source';
+import TodoController from 'controllers/Todo';
 
 const app = express();
 
@@ -41,6 +42,20 @@ app.get('/', (req: Request, res: Response) => {
   console.log(req.user);
   console.log(req.session);
   res.send('server on !');
+});
+
+app.get('/todo', async (req, res) => {
+  try {
+    const todo = await TodoController.create({
+      content: 'new',
+      date: new Date(),
+    });
+    console.log(todo);
+    res.send('done');
+  } catch (e) {
+    console.log(e);
+    return res.send('error');
+  }
 });
 
 AppDataSource.initialize()

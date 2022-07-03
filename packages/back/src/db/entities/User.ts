@@ -1,19 +1,9 @@
 import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
-
-export const userRole = {
-  '0': 'user',
-  '10': 'admin',
-};
-
-interface I_User {
-  sequence: number;
-  id: string;
-  name: string;
-  profile?: string;
-}
+import { Timestamp } from './Timestamp';
+import { UserRole } from './enum';
 
 @Entity()
-export class User implements I_User {
+export class User extends Timestamp {
   @PrimaryGeneratedColumn('increment')
   sequence!: number;
 
@@ -24,9 +14,11 @@ export class User implements I_User {
   name!: string;
 
   @Column({
-    default: 0,
+    type: 'enum',
+    enum: UserRole,
+    default: UserRole.USER,
   })
-  level!: number;
+  level!: UserRole;
 
   @Column()
   profile?: string;
