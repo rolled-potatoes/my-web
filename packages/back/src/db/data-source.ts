@@ -1,7 +1,7 @@
 import 'reflect-metadata';
-import env from '../env.json';
+import env from 'src/env.json';
 import { DataSource } from 'typeorm';
-import { User } from './entity/User';
+import { User } from 'entities/User';
 
 export const AppDataSource = new DataSource({
   name:'goorm_rolled_web',
