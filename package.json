@@ -10,9 +10,14 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "workspaces": ["./packages/*"],
+  "workspaces": [
+    "./packages/*"
+  ],
   "lint-staged": {
-    "packages/**/*.{js,jsx,ts,tsx,scss}": ["prettier --write", "git add"]
+    "packages/**/*.{js,jsx,ts,tsx,scss}": [
+      "prettier --write",
+      "git add"
+    ]
   },
   "dependencies": {
     "prettier": "^2.7.1"

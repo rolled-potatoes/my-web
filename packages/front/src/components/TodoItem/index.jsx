@@ -8,13 +8,13 @@ function TodoItem({ children, isDone }) {
     {
       icon: <Gear />,
       onClick: () => {},
-      color : 'primary'
+      color: 'primary',
     },
     {
       icon: <Trash />,
-      className:"ms-1",
+      className: 'ms-1',
       onClick: () => {},
-      color : 'danger'
+      color: 'danger',
     },
   ];
 

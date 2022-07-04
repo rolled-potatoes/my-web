@@ -7,10 +7,10 @@ class UserController {
       id,
     });
   }
-  findOneBySequence (sequence : number){
+  findOneBySequence(sequence: number) {
     return AppDataSource.manager.findOneBy(User, {
-      sequence
-    })
+      sequence,
+    });
   }
 
   createUser({

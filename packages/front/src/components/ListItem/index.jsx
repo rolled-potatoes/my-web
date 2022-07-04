@@ -29,7 +29,7 @@ function ListItem({
     >
       {children}
       {actionButtons.length > 0 && (
-        <span className='ms-2'>
+        <span className="ms-2">
           {actionButtons.map(({ ...rest }) => (
             <ActionButton {...rest} />
           ))}

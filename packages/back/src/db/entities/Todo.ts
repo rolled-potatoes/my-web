@@ -1,25 +1,25 @@
 import { PrimaryGeneratedColumn, Column, Entity } from 'typeorm';
 import { Timestamp } from './Timestamp';
-import {ScheduleItemType} from './enum';
+import { ScheduleItemType } from './enum';
 
 @Entity()
-export class Todo extends Timestamp{
+export class Todo extends Timestamp {
   @PrimaryGeneratedColumn('increment')
   sequence!: number;
 
   @Column({
-    default : ScheduleItemType.TODO
+    default: ScheduleItemType.TODO,
   })
   type: ScheduleItemType.TODO;
 
   @Column()
-  content !:string;
+  content!: string;
 
   @Column({
     default: false,
   })
-  isDone !: boolean;
+  isDone!: boolean;
 
   @Column()
-  date !: Date;
+  date!: Date;
 }

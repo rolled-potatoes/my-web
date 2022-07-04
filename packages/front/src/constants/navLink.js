@@ -4,7 +4,7 @@ const navigationDatas = [
   {
     url: '/',
     title: '메인',
-    Component : Main,
+    Component: Main,
   },
 ];
 

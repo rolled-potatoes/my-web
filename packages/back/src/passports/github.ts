@@ -8,7 +8,7 @@ interface I_GithubUser {
   photos: [
     {
       value: string;
-    },
+    }
   ];
 }
 
@@ -18,7 +18,7 @@ interface I_GithubAuth {
     accessToken: string,
     refreshToken: string,
     profile: any,
-    done: any,
+    done: any
   ): void;
 }
 
@@ -32,7 +32,7 @@ class GithubAuth implements I_GithubAuth {
         clientSecret: env.GITHUB_CLIENT_SECRET_KET,
         callbackURL: 'http://localhost:8080/auth/github/callback',
       },
-      this.callback,
+      this.callback
     );
   }
 
@@ -40,7 +40,7 @@ class GithubAuth implements I_GithubAuth {
     accessToken: string,
     refreshToken: string,
     profile: I_GithubUser,
-    done: any,
+    done: any
   ) {
     const user = await UserController.findOneById(profile.id);
 
@@ -52,7 +52,7 @@ class GithubAuth implements I_GithubAuth {
         name: profile.username,
         profile: profile.photos[0].value,
       });
-      
+
       return done(null, newUser);
     }
   }

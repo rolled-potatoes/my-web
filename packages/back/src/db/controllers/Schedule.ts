@@ -2,7 +2,7 @@ import { EntityManager } from 'typeorm';
 import { AppDataSource } from '../data-source';
 import { Todo } from 'entities/Todo';
 import { Schedule } from 'entities/Schedule';
-import {ScheduleItemType} from 'entities/enum'
+import { ScheduleItemType } from 'entities/enum';
 
 class ScheduleController {
   manager: EntityManager;

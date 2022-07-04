@@ -1,7 +1,7 @@
 import { EntityManager } from 'typeorm';
 import { AppDataSource } from '../data-source';
 import { Todo } from 'entities/Todo';
-import {ScheduleItemType} from 'entities/enum'
+import { ScheduleItemType } from 'entities/enum';
 import SchduleController from './Schedule';
 
 class TodoController {
@@ -22,7 +22,7 @@ class TodoController {
       itemType: ScheduleItemType.TODO,
     });
 
-    return todo; 
+    return todo;
   }
 }
 

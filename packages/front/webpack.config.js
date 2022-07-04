@@ -2,7 +2,7 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const makeAliasPath = () => {
-  const paths = ['pages', 'components', 'templates','icons', 'constants'];
+  const paths = ['pages', 'components', 'templates', 'icons', 'constants'];
   return paths.reduce((obj, p) => {
     obj[p] = path.join(__dirname, 'src', p);
     return obj;

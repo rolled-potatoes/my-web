@@ -1,7 +1,7 @@
 tabWidth: 2
 semi: true
 singleQuote: true
-tailingComma: 'es5'
+trailingComma: 'es5'
 bracketSpacing: true
 bracketSameLine: false
 arrowParens: 'always'
