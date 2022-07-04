@@ -4,15 +4,21 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prepare": "husky install"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "workspaces": [
-    "./packages/*"
-  ],
+  "workspaces": ["./packages/*"],
+  "lint-staged": {
+    "packages/**/*.{js,jsx,ts,tsx,scss}": ["prettier --write", "git add"]
+  },
   "dependencies": {
     "prettier": "^2.7.1"
+  },
+  "devDependencies": {
+    "husky": "^8.0.1",
+    "lint-staged": "^13.0.3"
   }
 }

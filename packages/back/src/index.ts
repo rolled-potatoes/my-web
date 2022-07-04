@@ -20,7 +20,7 @@ app.use(
     resave: false,
     saveUninitialized: true,
     cookie: { httpOnly: true, maxAge: 1000 * 60 * 60 * 24 },
-  }),
+  })
 );
 passportConfig();
 app.use(passport.initialize());
@@ -35,7 +35,7 @@ app.get(
     req.session.save(() => {
       return res.redirect('/');
     });
-  },
+  }
 );
 
 app.get('/', (req: Request, res: Response) => {
