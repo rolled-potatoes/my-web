@@ -1,20 +1,12 @@
 import passport from 'passport';
 import UserContoller from 'controllers/User';
+import { User } from 'entities/User';
 import github from './github';
 
 passport.use(github.strategy);
 
-interface I_GithubUser {
-  sequence: number;
-  id: string;
-  username: string;
-  photos: {
-    value: string;
-  };
-}
-
 export default () => {
-  passport.serializeUser(function (user: I_GithubUser, done) {
+  passport.serializeUser(function (user: User, done) {
     return done(null, user.sequence);
   });
 
