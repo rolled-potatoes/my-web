@@ -8,12 +8,14 @@ function TodoItem({ children, isDone }) {
     {
       icon: <Gear />,
       onClick: () => {},
+      key: 'setting',
       color: 'primary',
     },
     {
       icon: <Trash />,
       className: 'ms-1',
       onClick: () => {},
+      key: 'remove',
       color: 'danger',
     },
   ];

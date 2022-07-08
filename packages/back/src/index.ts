@@ -2,14 +2,18 @@ import express, { Request, Response } from 'express';
 import cookieParser from 'cookie-parser';
 import session from 'express-session';
 import passport from 'passport';
-import passportConfig from './passports';
 import morgan from 'morgan';
+import cors from 'cors';
+
+import passportConfig from './passports';
 import env from './env.json';
 import { AppDataSource } from './db/data-source';
 import TodoController from 'controllers/Todo';
+import routes from './routes';
 
 const app = express();
 
+app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
@@ -37,6 +41,8 @@ app.get(
     });
   }
 );
+
+app.use('/api', routes);
 
 app.get('/', (req: Request, res: Response) => {
   console.log(req.user);
