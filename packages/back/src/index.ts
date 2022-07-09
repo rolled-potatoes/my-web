@@ -13,7 +13,13 @@ import routes from './routes';
 
 const app = express();
 
-app.use(cors());
+app.use(
+  cors({
+    origin: 'http://localhost:3000',
+    credentials: true,
+  })
+);
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
@@ -22,13 +28,13 @@ app.use(
   session({
     secret: env.SESSION_KEY,
     resave: false,
-    saveUninitialized: true,
     cookie: { httpOnly: true, maxAge: 1000 * 60 * 60 * 24 },
   })
 );
+
 passportConfig();
-app.use(passport.initialize());
 app.use(passport.session());
+app.use(passport.initialize());
 app.use(morgan('dev'));
 
 app.get('/auth/github', passport.authenticate('github'));
@@ -37,7 +43,7 @@ app.get(
   passport.authenticate('github', { failureRedirect: '/' }),
   (req, res) => {
     req.session.save(() => {
-      return res.redirect('/');
+      return res.redirect('http://localhost:3000');
     });
   }
 );
