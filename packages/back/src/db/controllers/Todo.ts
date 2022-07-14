@@ -6,6 +6,7 @@ import SchduleController from './Schedule';
 
 class TodoController {
   manager: EntityManager;
+  entity: Todo;
 
   constructor() {
     this.manager = AppDataSource.manager;
@@ -23,6 +24,26 @@ class TodoController {
     });
 
     return todo;
+  }
+
+  async update({
+    sequence,
+    content,
+    isDone,
+    date,
+  }: {
+    sequence: number;
+    content?: string;
+    isDone?: boolean;
+    date?: Date;
+  }) {
+    const updateItem = {
+      ...{ content },
+      ...{ isDone },
+      ...{ date },
+    };
+
+    return this.manager.update(Todo, { sequence }, updateItem);
   }
 }
 

@@ -1,5 +1,5 @@
-import githubRouter from './github';
 import express from 'express';
+import githubRouter from './github';
 
 const router = express.Router();
 

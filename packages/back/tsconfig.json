@@ -18,7 +18,9 @@
     "paths": {
       "src/*": ["src/*"],
       "entities/*": ["src/db/entities/*"],
-      "controllers/*": ["src/db/controllers/*"]
+      "controllers/*": ["src/db/controllers/*"],
+      "services/*": ["src/services/*"],
+      "middlewares/*":["src/middlewares/*"]
     }
   },
   "include": ["src"],

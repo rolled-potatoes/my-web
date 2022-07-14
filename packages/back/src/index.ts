@@ -1,4 +1,9 @@
-import express, { Request, Response } from 'express';
+import express, {
+  ErrorRequestHandler,
+  Request,
+  Response,
+  NextFunction,
+} from 'express';
 import cookieParser from 'cookie-parser';
 import session from 'express-session';
 import passport from 'passport';
@@ -8,7 +13,6 @@ import cors from 'cors';
 import passportConfig from './passports';
 import env from './env.json';
 import { AppDataSource } from './db/data-source';
-import TodoController from 'controllers/Todo';
 import routes from './routes';
 
 const app = express();
@@ -37,38 +41,28 @@ app.use(passport.session());
 app.use(passport.initialize());
 app.use(morgan('dev'));
 
-app.get('/auth/github', passport.authenticate('github'));
-app.get(
-  '/auth/github/callback',
-  passport.authenticate('github', { failureRedirect: '/' }),
-  (req, res) => {
-    req.session.save(() => {
-      return res.redirect('http://localhost:3000');
-    });
-  }
-);
-
 app.use('/api', routes);
 
-app.get('/', (req: Request, res: Response) => {
-  console.log(req.user);
-  console.log(req.session);
-  res.send('server on !');
+app.use((req: Request, res: Response) => {
+  res.status(404).send('not found');
 });
 
-app.get('/todo', async (req, res) => {
-  try {
-    const todo = await TodoController.create({
-      content: 'new',
-      date: new Date(),
-    });
-    console.log(todo);
-    res.send('done');
-  } catch (e) {
-    console.log(e);
-    return res.send('error');
+interface I_ErrorRequest extends ErrorRequestHandler {
+  status?: number;
+  message?: string;
+  error: any;
+}
+
+app.use(
+  (error: I_ErrorRequest, req: Request, res: Response, next: NextFunction) => {
+    console.error(error);
+    const responseStatus = error.status ?? 500;
+    const responseMessage =
+      responseStatus >= 500 ? 'internal error' : error.message ?? 'error';
+
+    res.status(responseStatus).send(responseMessage);
   }
-});
+);
 
 AppDataSource.initialize()
   .then(() => {
