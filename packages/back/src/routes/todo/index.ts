@@ -10,6 +10,7 @@ const router = express.Router();
 router.post(
   '',
   middlewarePassport.isLoggedIn,
+  middlewarePassport.isMaster,
   async (req: Request, res: Response, next: NextFunction) => {
     let { content, date } = req.body;
     if (!content) content = '';
@@ -40,6 +41,7 @@ router.post(
 router.patch(
   '/:sequence',
   middlewarePassport.isLoggedIn,
+  middlewarePassport.isMaster,
   async (req, res, next) => {
     const { sequence } = req.params;
 
