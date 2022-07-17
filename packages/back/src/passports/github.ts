@@ -30,7 +30,7 @@ class GithubAuth implements I_GithubAuth {
       {
         clientID: env.GITHUB_CLIENT_KEY,
         clientSecret: env.GITHUB_CLIENT_SECRET_KET,
-        callbackURL: 'http://localhost:8080/auth/github/callback',
+        callbackURL: 'http://localhost:8080/api/auth/github/callback',
       },
       this.callback
     );

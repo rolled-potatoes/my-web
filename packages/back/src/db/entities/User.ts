@@ -1,4 +1,5 @@
-import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
+import { OneToMany, Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
+import { Todo } from './Todo';
 import { Timestamp } from './Timestamp';
 import { UserRole } from './enum';
 
@@ -22,4 +23,7 @@ export class User extends Timestamp {
 
   @Column()
   profile?: string;
+
+  @OneToMany(() => Todo, (todo) => todo.sequence)
+  todos: Todo[];
 }

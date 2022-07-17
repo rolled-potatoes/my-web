@@ -1,4 +1,11 @@
-import { PrimaryGeneratedColumn, Column, Entity } from 'typeorm';
+import {
+  ManyToOne,
+  PrimaryGeneratedColumn,
+  Column,
+  Entity,
+  JoinColumn,
+} from 'typeorm';
+import { User } from './User';
 import { Timestamp } from './Timestamp';
 import { ScheduleItemType } from './enum';
 
@@ -22,4 +29,8 @@ export class Todo extends Timestamp {
 
   @Column()
   date!: Date;
+
+  @ManyToOne(() => User, (user) => user.sequence)
+  @JoinColumn({ name: 'userSequence' })
+  user!: User;
 }

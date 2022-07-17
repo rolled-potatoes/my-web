@@ -1,8 +1,7 @@
 import { EntityManager } from 'typeorm';
 import { AppDataSource } from '../data-source';
 import { Todo } from 'entities/Todo';
-import { ScheduleItemType } from 'entities/enum';
-import SchduleController from './Schedule';
+import { User } from 'entities/User';
 
 class TodoController {
   manager: EntityManager;
@@ -12,16 +11,21 @@ class TodoController {
     this.manager = AppDataSource.manager;
   }
 
-  async create({ content, date }: { content: string; date: Date }) {
+  async create({
+    content,
+    date,
+    user,
+  }: {
+    content: string;
+    date: Date;
+    user: User;
+  }) {
     const newTodo = new Todo();
+    newTodo.user = user;
     newTodo.content = content;
     newTodo.date = date;
 
     const todo = await this.manager.save(newTodo);
-    await SchduleController.create({
-      todo,
-      itemType: ScheduleItemType.TODO,
-    });
 
     return todo;
   }

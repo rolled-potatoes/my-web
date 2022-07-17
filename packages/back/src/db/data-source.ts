@@ -2,7 +2,6 @@ import 'reflect-metadata';
 import env from 'src/env.json';
 import { DataSource } from 'typeorm';
 import { User } from 'entities/User';
-import { Schedule } from 'entities/Schedule';
 import { Todo } from 'entities/Todo';
 
 export const AppDataSource = new DataSource({
@@ -15,7 +14,7 @@ export const AppDataSource = new DataSource({
   database: env.DB_DBTABASE,
   synchronize: true,
   logging: false,
-  entities: [User, Schedule, Todo],
+  entities: [User, Todo],
   migrations: [],
   subscribers: [],
   timezone: 'z',

@@ -1,7 +1,7 @@
 import TodoController from 'controllers/Todo';
 import { UpdateResult } from 'typeorm';
 
-export async function patchOne({
+async function patchOne({
   sequence,
   content,
   isDone,
@@ -28,4 +28,6 @@ export async function patchOne({
   return res;
 }
 
-export default {};
+export default {
+  patchOne,
+};
