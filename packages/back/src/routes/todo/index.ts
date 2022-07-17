@@ -7,71 +7,62 @@ import { User } from 'entities/User';
 
 const router = express.Router();
 
-router.post(
-  '',
-  middlewarePassport.isLoggedIn,
-  middlewarePassport.isMaster,
-  async (req: Request, res: Response, next: NextFunction) => {
-    let { content, date } = req.body;
-    if (!content) content = '';
-    if (!date) date = new Date();
+router.use('*', middlewarePassport.isLoggedIn, middlewarePassport.isMaster);
+router.post('', async (req: Request, res: Response, next: NextFunction) => {
+  let { content, date } = req.body;
+  if (!content) content = '';
+  if (!date) date = new Date();
 
-    let result: Todo;
+  let result: Todo;
 
-    try {
-      result = await todoController.create({
-        content,
-        date,
-        user: req.user as User,
-      });
-    } catch (e) {
-      next({
-        status: 500,
-        message: 'create todo error',
-        error: e,
-      });
-    }
-
-    res.json({
-      todo: result,
+  try {
+    result = await todoController.create({
+      content,
+      date,
+      user: req.user as User,
+    });
+  } catch (e) {
+    next({
+      status: 500,
+      message: 'create todo error',
+      error: e,
     });
   }
-);
 
-router.patch(
-  '/:sequence',
-  middlewarePassport.isLoggedIn,
-  middlewarePassport.isMaster,
-  async (req, res, next) => {
-    const { sequence } = req.params;
+  res.json({
+    todo: result,
+  });
+});
 
-    if (sequence === undefined) {
-      next({
-        status: 400,
-        message: 'not find sequence',
-      });
-      return;
-    }
+router.patch('/:sequence', async (req, res, next) => {
+  const { sequence } = req.params;
 
-    try {
-      await serviceTodo.patchOne({
-        sequence: +sequence,
-        content: req.body.content,
-        isDone: req.body.isDone,
-        date: req.body.date,
-      });
-    } catch (e) {
-      next({
-        status: 500,
-        message: 'todo service error',
-        error: e,
-      });
-    }
+  if (sequence === undefined) {
+    next({
+      status: 400,
+      message: 'not find sequence',
+    });
+    return;
+  }
 
-    res.json({
-      success: true,
+  try {
+    await serviceTodo.patchOne({
+      sequence: +sequence,
+      content: req.body.content,
+      isDone: req.body.isDone,
+      date: req.body.date,
+    });
+  } catch (e) {
+    next({
+      status: 500,
+      message: 'todo service error',
+      error: e,
     });
   }
-);
+
+  res.json({
+    success: true,
+  });
+});
 
 export default router;

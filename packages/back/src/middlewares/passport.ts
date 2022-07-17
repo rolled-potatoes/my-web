@@ -1,8 +1,10 @@
 import { Request, Response, NextFunction } from 'express';
+import { User } from 'entities/User';
 import { UserRole } from 'src/db/entities/enum';
 
 function isMaster(req: Request, res: Response, next: NextFunction) {
-  if (req.user && req.user.level === UserRole.ADMIN) {
+  const user = req.user as User;
+  if (user && user.level === UserRole.ADMIN) {
     next();
     return;
   } else {
